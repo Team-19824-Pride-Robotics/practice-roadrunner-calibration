@@ -29,42 +29,41 @@
 
 package org.firstinspires.ftc.teamcode.drive;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
-import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import com.qualcomm.robotcore.util.Range;
 
-
-@Autonomous(name="practiceAuto")
+@Autonomous(name="practice2Auto")
 //@Disabled
-public class practice_Autonomous extends LinearOpMode {
+public class practice2_Autonomous extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        waitForStart();
+        Pose2d startPose = new Pose2d(0, 0, 0);
 
-        if (isStopRequested()) return;
+        drive.setPoseEstimate(startPose);
 
-        Trajectory traj = drive.trajectoryBuilder(new Pose2d())
-                .lineToConstantHeading(new Vector2d(0, 30))
+        TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
+                .lineToConstantHeading(new Vector2d(-20, 0))
+                .waitSeconds(2)
+                .strafeLeft(20)
+                .waitSeconds(2)
+                .turn(Math.toRadians(90))
+                .lineToConstantHeading(new Vector2d(-40, -30))
                 .build();
 
-        drive.followTrajectory(traj);
+        waitForStart();
 
-        sleep(2000);
-
-        drive.followTrajectory(
-                drive.trajectoryBuilder(traj.end(), true)
-                        .lineToConstantHeading(new Vector2d(0, 0))
-                        .build()
-        );
+        if (!isStopRequested())
+            drive.followTrajectorySequence(trajSeq);
     }
 }
 
