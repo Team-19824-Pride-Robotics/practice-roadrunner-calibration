@@ -31,17 +31,15 @@ package org.firstinspires.ftc.teamcode.drive;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-@Autonomous(name="practice2Auto")
+
+@Autonomous(name="practice3Auto")
 //@Disabled
-public class practice2_Autonomous extends LinearOpMode {
+public class practice3_Autonomous extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -52,12 +50,7 @@ public class practice2_Autonomous extends LinearOpMode {
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
-                .forward(16)
-                .strafeLeft(20)
-                .waitSeconds(2)
-                .turn(Math.toRadians(90))
-                .lineToConstantHeading(new Vector2d(2, 52))
-                .waitSeconds(2)
+                .splineToLinearHeading(new Pose2d(23, 47, Math.toRadians(90)), Math.toRadians(0))
                 .build();
 
 

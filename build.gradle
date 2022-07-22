@@ -17,6 +17,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:7.2.1'
     }
+
 }
 
 // This is now required because aapt2 has to be downloaded from the
