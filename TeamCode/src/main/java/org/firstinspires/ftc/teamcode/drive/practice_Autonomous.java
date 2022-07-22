@@ -53,7 +53,7 @@ public class practice_Autonomous extends LinearOpMode {
         if (isStopRequested()) return;
 
         Trajectory traj = drive.trajectoryBuilder(new Pose2d())
-                .lineToConstantHeading(new Vector2d(0, 30))
+                .lineToConstantHeading(new Vector2d(10, 0))
                 .build();
 
         drive.followTrajectory(traj);

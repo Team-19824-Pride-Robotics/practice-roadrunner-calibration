@@ -47,18 +47,17 @@ public class practice2_Autonomous extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        Pose2d startPose = new Pose2d(0, 0, 0);
+        Pose2d startPose = new Pose2d(0, 0, Math.toRadians(0));
 
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
-                .lineToConstantHeading(new Vector2d(-20, 0))
-                .waitSeconds(2)
-                .strafeLeft(20)
-                .waitSeconds(2)
-                .turn(Math.toRadians(90))
-                .lineToConstantHeading(new Vector2d(-40, -30))
+                  .lineToConstantHeading(new Vector2d(10, 20))
+//                  .strafeLeft(20)
+//                  .turn(Math.toRadians(90))
+
                 .build();
+
 
         waitForStart();
 
