@@ -52,11 +52,11 @@ public class practice2_Autonomous extends LinearOpMode {
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
-                .forward(16)
-                .strafeLeft(20)
+                .forward(20)
+                .strafeLeft(24)
                 .waitSeconds(2)
-                .turn(Math.toRadians(90))
-                .lineToConstantHeading(new Vector2d(2, 52))
+                .turn(Math.toRadians(180))
+                .forward(60)
                 .waitSeconds(2)
                 .build();
 

@@ -15,17 +15,34 @@ public class practice_TeleOp extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        double slow = 0.25;
 
         waitForStart();
 
         while (!isStopRequested()) {
-            drive.setWeightedDrivePower(
-                    new Pose2d(
-                            -gamepad1.left_stick_y,
-                            -gamepad1.left_stick_x,
-                            -gamepad1.right_stick_x
-                    )
-            );
+
+            if (gamepad1.right_bumper) {
+                drive.setWeightedDrivePower(
+                        new Pose2d(
+                                -gamepad1.left_stick_y*slow,
+                                -gamepad1.left_stick_x*slow,
+                                -gamepad1.right_stick_x*slow
+                        )
+                );
+            }
+            else {
+                drive.setWeightedDrivePower(
+                        new Pose2d(
+                                -gamepad1.left_stick_y,
+                                -gamepad1.left_stick_x,
+                                -gamepad1.right_stick_x
+                        )
+                );
+            }
+
+            if (gamepad1.x) {
+                drive.turn(Math.toRadians(180));
+            }
 
             drive.update();
 
